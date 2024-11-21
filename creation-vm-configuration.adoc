@@ -1,0 +1,252 @@
+= Création  d'une VM
+:revealjs_theme: black
+
+== Étape 1 : Accéder au portail Azure
+
+Se connecter au portail Azure : https://portal.azure.com.
+
+Une fois connecté, on fonce dans la barre de recherche en haut et on tape "Machines virtuelles", puis on clique sur le service.
+
+== Étape 2 : Lancer la création d'une VM
+
+Cliquez sur le bouton "Créer" ou "Ajouter" pour démarrer le processus de création.
+Choisissez "Machine virtuelle Azure".
+
+== Étape 3 : Configurer les paramètres de base
+
+* Abonnement : Sélectionnez votre abonnement Azure actif.
+
+=== ...
+
+* Groupe de ressources : Créez-en un nouveau ou utilisez-en un existant.
+* Exemple : TradifyResourceGroup
+
+=== ...
+
+* Nom de la VM : Donnez un nom à votre VM.
+* Exemple : TradifyFrontendVM
+
+
+=== ...
+
+* Région : Choisissons une région proche de nous ou de nos utilisateurs.
+* Exemple : France Central.
+
+
+=== ...
+
+* Disponibilité : Choisissez une zone de disponibilité si nécessaire pour assurer une haute disponibilité.
+
+=== ...
+
+* Image : Sélectionnez le système d'exploitation pour votre VM.
+* Exemple : Ubuntu Server 20.04 LTS ou Windows Server 2019.
+
+=== ...
+
+* Taille : Choisissez la taille de la VM en fonction de vos besoins.
+* Exemple : Standard_B1s (petite et économique).
+
+
+== Étape 4 : Configurer les paramètres d'administration
+
+* Nom d'utilisateur : Définissez un nom pour l'administrateur de la VM.
+* Exemple : adminuser.
+
+
+=== ...
+
+* Méthode d'authentification :
+Choisissez entre mot de passe ou clé SSH.
+
+=== ...
+
+* Exemple pour un mot de passe :
+* Mot de passe : Caroline2022!
+* Confirmation : Caroline2022!
+
+
+== Étape 5 : Configurer le réseau
+
+* Réseau virtuel : Azure va en créer un par défaut, ou sinon on en crée un.
+
+
+=== ...
+
+* Sous-réseau : Utilisons celui proposé par défaut.
+
+
+=== ...
+
+
+* Adresse IP publique : Laissons l'adresse IP publique activée pour accéder à la VM depuis Internet.
+
+
+=== ...
+
+
+Groupes de sécurité réseau (pare-feu) :
+
+=== Permettez les ports nécessaires :
+SSH (port 22) pour les VM Linux.
+RDP (port 3389) pour les VM Windows.
+
+=== Étape 6 : Ajouter des options supplémentaires (facultatif)
+
+* Configurez le disque de la VM :
+* Type de disque : Disque SSD standard (choix économique).
+* Sauvegarde : Activez ou désactivez la sauvegarde automatique selon vos besoins.
+
+=== Étape 7 : Vérification et création
+
+Cliquez sur "Vérifier et créer".
+
+Une fois la validation terminée, cliquez sur "Créer".
+
+Attendons quelques minutes que la VM soit déployée.
+
+=== Étape 8 : Connexion à la VM
+
+Une fois la VM déployée, allez dans la section Vue d’ensemble de votre VM.
+Notez l'adresse IP publique.
+
+
+Utilisons un outil tel que PuTTY (pour Windows) ou le terminal (Linux/macOS) pour nous connecter.
+
+=== Exemple de commande pour une VM Linux :
+[source, bash]
+----
+ssh adminuser@<adresse_ip_publique>
+----
+
+Pour une VM Windows, téléchargez le fichier RDP depuis le portail Azure et connectez-vous via le Bureau à Distance.
+
+
+
+== Une fois que la VM est opérationnelle
+
+
+Une fois votre machine virtuelle (VM) déployée on peut continuer:
+
+
+== Installer des applications
+
+
+=== Sur une VM Linux :
+
+Connectez-vous via SSH :
+[source, bash]
+----
+ssh adminuser@<adresse_ip_publique>
+----
+
+Mettons à jour les paquets :
+[source, bash]
+----
+sudo apt update && sudo apt upgrade -y
+----
+
+Installez une application, par exemple, un serveur web comme Apache :
+[source, bash]
+----
+sudo apt install apache2 -y
+----
+
+
+=== Vérifiez si Apache fonctionne :
+
+Ouvrez un navigateur et accédez à http://<adresse_ip_publique> pour voir la page par défaut d’Apache.
+
+
+
+=== Sur une VM Windows :
+
+Connectez-vous via RDP (Bureau à distance).
+Ouvrez le Gestionnaire de serveur pour ajouter des rôles ou fonctionnalités (par ex., IIS pour un serveur web).
+
+Téléchargez et installez des applications nécessaires via un navigateur ou un gestionnaire de packages comme Chocolatey.
+
+== 2. Configurer des services
+Serveur de base de données (exemple : MySQL sur Linux) :
+
+
+=== Installez MySQL :
+[source, bash]
+----
+sudo apt install mysql-server -y
+----
+
+
+=== Sécurisez l’installation :
+[source, bash]
+----
+sudo mysql_secure_installation
+----
+
+
+=== Accédez à MySQL :
+[source, bash]
+----
+sudo mysql
+----
+
+
+=== Serveur DNS ou DNS Masqué : 
+
+Configurons un service DNS en installant BIND ou un autre outil DNS pour gérer vos domaines.
+
+
+=== Active Directory sur une VM Windows : 
+
+Ajoutons le rôle Active Directory Domain Services via le Gestionnaire de serveur, puis configurons un domaine.
+
+
+== 3. Tester des scénarios
+
+
+=== Scénario de déploiement d'application : 
+
+Déployez une application web simple (HTML, PHP, ou Node.js) sur un serveur web comme Apache, IIS ou Nginx.
+
+
+=== Simulation réseau : 
+
+Connectez plusieurs VMs dans un réseau virtuel (VNet) pour simuler une infrastructure réseau complète avec des rôles comme :
+
+* Serveur DNS
+* Serveur web
+* Serveur de fichiers (SMB/NFS).
+
+=== Tests de sécurité :
+
+Configurons des groupes de sécurité réseau (NSG) pour restreindre les accès à certains ports.
+
+=== ...
+
+Activons Azure Bastion pour une connexion sécurisée à vos VMs sans exposer de ports (comme SSH ou RDP).
+
+== 4. Configurer des sauvegardes
+
+Allez dans l’onglet Sauvegarde de la VM sur le portail Azure.
+Configurez une stratégie de sauvegarde pour automatiser les sauvegardes quotidiennes de votre VM.
+
+== 5. Activer la supervision et le monitoring
+
+
+=== Azure Monitor : 
+
+Configurez des alertes pour surveiller les performances de votre VM (CPU, mémoire, réseau).
+
+=== Log Analytics : 
+
+Activez l’agent Azure pour centraliser les journaux et analyser les données en temps réel.
+
+
+
+
+
+
+
+
+
+

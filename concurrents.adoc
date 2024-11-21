@@ -1,0 +1,48 @@
+= Les concurrents d'Azure
+:revealjs_theme: black
+
+
+== Introduction
+
+Microsoft Azure, Amazon Web Services (AWS) et Google Cloud Platform (GCP) sont les trois principaux acteurs du marché du cloud computing/
+
+
+== Amazon Web Services (AWS)
+
+Lancé en 2006, AWS est le pionnier des services cloud et demeure le leader du marché avec une part estimée à 34 % au troisième trimestre 2022 
+
+== Google Cloud Platform (GCP)
+
+Né en 2010, GCP se distingue par ses capacités avancées en matière de big data, d'intelligence artificielle (IA) et d'apprentissage automatique. 
+
+=== ...
+
+Même si sa part de marché est inférieure à celle d'AWS et d'Azure, avec environ 11 % au troisième trimestre 2022 , ...
+
+=== ...
+
+GCP est reconnu pour ses performances dans le traitement des données massives et ses outils d'IA. 
+
+=== ...
+
+Les services phares incluent Google Compute Engine pour le calcul, Google Cloud Storage pour le stockage et BigQuery pour l'analyse de données.
+
+
+=== Comparaison des parts de marché
+
+Selon les estimations du Synergy Research Group, au troisième trimestre 2022, ...
+
+=== ...
+
+
+les parts de marché mondiales des principaux fournisseurs de services d'infrastructure cloud étaient les suivantes :
+
+[%step]
+* Amazon Web Services (AWS) : 34 %
+* Microsoft Azure : 21 %
+* Google Cloud Platform (GCP) : 11 %
+
+=== ...
+
+Ces trois fournisseurs dominent le marché, captant environ les deux tiers du chiffre d'affaires mondial des services cloud 
+

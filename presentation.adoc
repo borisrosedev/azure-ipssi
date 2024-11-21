@@ -1,0 +1,181 @@
+= Présentation du Cloud Computing et de Microsoft Azure
+:revealjs_theme: black
+
+== 1. Qu’est-ce que le Cloud Computing ?
+
+Le Cloud Computing est un modèle informatique qui permet d’accéder à des ressources informatiques ...
+
+=== ...
+
+
+(comme les serveurs, le stockage, les bases de données, le réseau, les logiciels) via Internet, sans avoir besoin d'investir dans une infrastructure physique.
+
+
+=== Caractéristiques clés :
+
+
+=== Accès à la demande : 
+
+Les ressources sont disponibles à tout moment via Internet.
+
+=== Évolutivité : 
+
+Les entreprises peuvent facilement augmenter ou réduire les capacités en fonction de leurs besoins.
+
+=== Paiement à l’utilisation : 
+
+Les utilisateurs ne paient que pour ce qu’ils consomment.
+
+=== Haute disponibilité : 
+
+Les ressources sont accessibles depuis n’importe où et garanties par des SLA (Service Level Agreements).
+
+=== Exemples d’usage :
+
+Héberger des sites web.
+
+=== Stocker et analyser de grandes quantités de données.
+
+* Exécuter des applications métier.
+* Développer des environnements de test et de développement.
+
+== 2. Modèles de service Cloud
+
+
+Les services Cloud sont généralement regroupés en trois catégories principales :
+
+
+=== IaaS (Infrastructure as a Service) :
+
+Offre des ressources matérielles virtualisées comme des serveurs, du stockage ou des réseaux.
+
+
+=== Exemple : Créer une machine virtuelle pour héberger une application.
+
+
+=== Fournisseurs : 
+
+[%step]
+* Azure, 
+* AWS, 
+* Google Cloud.
+
+=== PaaS (Platform as a Service) :
+
+Fournit des outils et services pour développer, tester et déployer des applications sans se soucier de la gestion de l'infrastructure sous-jacente.
+
+=== Exemple : 
+
+Hébergement d’une application web avec Azure App Service.
+
+
+=== SaaS (Software as a Service) :
+
+Accès direct à des logiciels prêts à l'emploi via Internet.
+
+=== Exemple : Microsoft 365, Google Workspace.
+
+
+== 3. Types de déploiement Cloud
+
+=== Cloud public : 
+
+Partagé entre plusieurs organisations (Azure, AWS).
+
+=== Cloud privé : 
+
+Dédié à une seule organisation.
+
+=== Cloud hybride : 
+
+Combine des ressources publiques et privées.
+
+== 4. Présentation de Microsoft Azure
+
+Microsoft Azure est une plateforme Cloud complète développée par Microsoft, qui offre plus de 200 services dans plusieurs domaines : informatique, stockage, bases de données, IA, sécurité, etc.
+
+
+== Caractéristiques clés d’Azure :
+
+=== Écosystème diversifié :
+
+Services pour le développement, le déploiement et la gestion d’applications dans le Cloud.
+
+=== Évolutivité mondiale :
+
+
+Disponible dans plus de 60 régions à travers le monde.
+
+=== Interopérabilité :
+
+
+Intégration native avec les outils Microsoft (Windows Server, Active Directory, SQL Server).
+
+=== Sécurité renforcée :
+
+
+Azure offre des certifications de sécurité (ISO 27001, GDPR) et des outils comme Azure Security Center.
+
+== 5. Services clés d'Azure
+
+
+== Compute :
+
+[%step]
+* Azure Virtual Machines (VMs) : Machines virtuelles dans le Cloud.
+* Azure Kubernetes Service (AKS) : Orchestration des conteneurs.
+* Azure App Service : Hébergement d’applications web.
+
+== Stockage :
+
+
+=== Azure Blob Storage : Stockage d’objets pour les données non structurées.
+
+=== Azure Files : 
+
+Partages de fichiers dans le Cloud.
+
+== Bases de données :
+
+
+=== Azure SQL Database : 
+
+Base de données relationnelle managée.
+
+=== Cosmos DB : 
+
+Base de données NoSQL distribuée mondialement.
+Réseautique :
+
+
+=== Azure Virtual Network (VNet) : Réseaux privés dans Azure.
+
+
+=== Azure Load Balancer : Répartition de la charge.
+IA et Machine Learning :
+
+
+=== Azure Cognitive Services : 
+
+IA prête à l'emploi pour reconnaissance faciale, analyse de texte, etc.
+
+=== Azure Machine Learning : 
+
+Développement de modèles d’apprentissage automatique.
+
+== 6. Pourquoi choisir Microsoft Azure ?
+
+Fiabilité : SLA offrant jusqu’à 99,99 % de disponibilité.
+
+=== Flexibilité : 
+
+Prise en charge de multiples langages et frameworks (Python, Java, .NET, etc.).
+
+
+== Tarification compétitive : 
+
+Modèle pay-as-you-go avec des options gratuites pour démarrer.
+
+=== Date centers : 
+
+Data centers dans le monde entier, garantissant la conformité aux réglementations locales.

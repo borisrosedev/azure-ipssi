@@ -1,0 +1,101 @@
+= Introduction à Microsoft Azure 
+:revealjs_theme: black
+
+== Définition et importance : 
+
+* link:./presentation.html[Présentation du Cloud Computing et de Microsoft Azure]
+* link:./differents-modules.html[Différenciation des principaux modèles de services].
+* link:./concurrents.html[Présentation des concurrents d'Azure (AWS, Google Cloud).]
+
+=== Cas d’usage courants : Pourquoi les entreprises choisissent Azure.
+
+
+// Partie 2
+== Exploration de l'écosystème Azure 
+
+=== Présentation du portail Azure
+=== Composants fondamentaux :
+
+* link:./azure-vm.html[Azure Virtual Machines (VM)].
+* link:./azure-blog-table-queue.html[Azure Storage (Blob, Table, Queue)]
+* link:./azure-networking.html[Azure Networking (VNet, VPN Gateway)]
+
+=== Services de base : Compute, Storage, Networking, et Databases.
+
+* link:./creation-vm-configuration.html[création d’une VM et configuration rapide]
+
+
+// Partie 3
+
+== Gestion des ressources et outils Azure
+
+=== Azure Resource Manager (ARM) :
+
+
+link:./azure-resource-manager.html[* Groupes de ressources, 
+* modèles ARM.]
+
+== Azure CLI et PowerShell pour la gestion des ressources :
+
+* Commandes essentielles pour créer et gérer des ressources.
+
+== Introduction à Azure Cost Management et Pricing :
+
+* Optimisation des coûts.
+* Modèle de facturation.
+
+
+
+// Partie 4
+== Sécurité et gestion des identités dans Azure 
+
+=== Azure Active Directory (AAD) :
+
+* Gestion des utilisateurs et groupes.
+* Authentification multifacteur (MFA).
+
+=== Rôles et permissions :
+
+* RBAC (Role-Based Access Control).
+
+=== Présentation des outils de sécurité Azure :
+
+* Azure Security Center.
+* Azure Defender.
+
+
+// Partie 5
+== Déploiement d’une application dans Azure 
+
+=== Introduction à App Services :
+
+* Déploiement d’une application web.
+* Configuration rapide et gestion du scaling.
+
+=== Bases sur Azure DevOps :
+
+* Pipelines CI/CD (Je n'aborderai pas ce thème, vous le reverrez plus tard)
+
+=== Exemple pratique :
+
+* link:./heberger-site-statique.html[Héberger un site statique sur Azure Storage.]
+
+
+// Partie 6
+== Monitoring, Supervision et Résilience 
+
+=== Outils de supervision :
+
+* link:./azure-monitor.html[Azure Monitor].
+* link:./applications-insight.html[Application Insights].
+
+=== Mise en place de sauvegardes :
+
+* Sauvegarde et restauration des VM.
+
+* Introduction aux solutions de redondance et haute disponibilité.
+
+
+
+
+

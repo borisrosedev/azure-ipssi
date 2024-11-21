@@ -1,0 +1,231 @@
+=  Déployer une application fullstack
+:revealjs_theme: black
+
+== Introduction
+
+Pour déployer votre frontend Remix et votre backend Node.js sur une même machine virtuelle Apache.
+
+
+== Étape 1 : Préparer votre machine
+Connectez-vous à votre machine virtuelle :
+
+[source, bash]
+----
+ssh -i ~/Downloads/azure_key.pem azureuser@<adresse_ip_publique>
+----
+
+Assurez-vous que Node.js et npm sont installés :
+
+[source, bash]
+----
+node -v
+npm -v
+----
+
+Si ce n’est pas le cas, installez-les :
+
+[source, bash]
+----
+sudo apt update
+sudo apt install nodejs npm -y
+----
+
+Assurez-vous qu’Apache est installé et actif :
+
+[source, bash]
+----
+sudo apt install apache2 -y
+sudo systemctl status apache2
+----
+
+== Étape 2 : Déployer le frontend Remix
+Copiez votre projet Remix sur la machine : Transférez les fichiers via SCP ou un outil comme rsync :
+
+[source, bash]
+----
+scp -i ~/Downloads/azure_key.pem -r /chemin/vers/mon-projet azureuser@<adresse_ip_publique>:/home/azureuser/remix-app
+----
+
+Connectez-vous à la machine et accédez au répertoire :
+
+[source, bash]
+----
+cd /home/azureuser/remix-app
+----
+
+Installez les dépendances Remix :
+
+[source, bash]
+----
+npm install
+----
+
+Compilez et préparez l’application Remix pour la production :
+
+[source, bash]
+----
+npm run build
+----
+
+Lancez l’application Remix sur un port spécifique :
+
+[source, bash]
+----
+npm start
+----
+
+Par défaut, Remix écoute sur le port 3000.
+
+Testez l'application Remix :
+
+Rendez-vous sur http://<adresse_ip_publique>:3000 pour vérifier si le frontend fonctionne.
+
+== Étape 3 : Déployer le backend Node.js
+
+=== Copiez votre backend sur la machine : 
+
+Comme pour le frontend, transférez les fichiers du backend :
+
+[source, bash]
+----
+scp -i ~/Downloads/azure_key.pem -r /chemin/vers/backend azureuser@<adresse_ip_publique>:/home/azureuser/backend
+----
+
+
+Accédez au dossier du backend et installez les dépendances :
+
+[source, bash]
+----
+cd /home/azureuser/backend
+npm install
+----
+
+Configurez le backend pour écouter sur un port différent, par exemple 4000 (modifiez votre code si nécessaire) :
+
+Dans votre fichier backend principal (par exemple server.js), assurez-vous qu'il utilise ce port :
+[source, js]
+----
+const express = require('express');
+const app = express();
+const PORT = 4000;
+
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
+});
+----
+
+
+Lancez le backend :
+
+[source, bash]
+----
+node server.js
+----
+
+
+=== Testez le backend :
+
+Accédez à http://<adresse_ip_publique>:4000/api ou une autre route de votre API pour vérifier qu'il fonctionne.
+
+
+== Étape 4 : Configurer Apache comme reverse proxy
+
+Apache va permettre de rendre votre frontend et votre backend accessibles depuis des chemins spécifiques sur le port 80.
+
+
+=== Activez les modules proxy nécessaires :
+
+[source, bash]
+----
+sudo a2enmod proxy proxy_http
+sudo systemctl restart apache2
+----
+
+
+=== Modifiez la configuration d'Apache :
+
+Ouvrez le fichier de configuration du site par défaut :
+
+[source, bash]
+----
+sudo nano /etc/apache2/sites-available/000-default.conf
+----
+
+Ajoutez les règles suivantes pour rediriger vers le frontend et le backend :
+
+[source, txt]
+----
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    # Proxy pour le frontend Remix
+    ProxyPass / http://localhost:3000/
+    ProxyPassReverse / http://localhost:3000/
+
+    # Proxy pour le backend Node.js
+    ProxyPass /api http://localhost:4000/
+    ProxyPassReverse /api http://localhost:4000/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+----
+
+Redémarrez Apache pour appliquer les changements :
+
+
+[source, bash]
+----
+sudo systemctl restart apache2
+----
+
+== Étape 5 : Tester le déploiement
+
+
+Frontend : Accédons à http://<adresse_ip_publique>. 
+
+
+Backend : Testons une route API via http://<adresse_ip_publique>/api/v1.
+
+
+== Étape 6 : Automatiser les applications avec PM2 (facultatif)
+
+
+Pour éviter de lancer manuellement vos applications à chaque redémarrage de la machine, utilisons PM2, un gestionnaire de processus Node.js.
+
+
+Installons PM2 globalement :
+
+[source, bash]
+----
+sudo npm install -g pm2
+----
+
+
+Démarrez vos applications :
+
+
+=== Frontend Remix :
+
+[source, bash]
+----
+pm2 start "npm start" --name remix-app -- cwd /home/azureuser/remix-app
+----
+
+=== Backend Node.js :
+[source, bash]
+----
+pm2 start server.js --name backend -- cwd /home/azureuser/backend
+----
+
+
+Assurez-vous que PM2 redémarre les applications après un reboot :
+
+[source, bash]
+----
+pm2 startup
+pm2 save
+----
+
+

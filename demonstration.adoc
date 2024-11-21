@@ -1,0 +1,59 @@
+= Démonstration
+:revealjs_theme: black
+
+
+== 1. Créer une VM Linux 
+
+Accédons au portail Azure : https://portal.azure.com.
+Cliquons sur "Créer une ressource" > "Machine Virtuelle".
+
+=== Remplissons les paramètres simples :
+Nom de la VM : BorisVM.
+Image : Ubuntu Server 20.04 LTS.
+Taille : Standard_B1s (économique).
+
+=== ...
+
+Authentification : Mot de passe.
+Nom d'utilisateur : boris.
+Mot de passe : caroline2022!.
+
+=== Réseau :
+Activons le port SSH (22).
+Cliquons sur "Vérifier et créer", puis sur "Créer".
+
+
+== 2. Connecter et installer un serveur web
+
+Une fois la VM prête, allez dans Vue d’ensemble et notez l’adresse IP publique.
+
+Connectez-vous à la VM via SSH :
+
+Utilisons un terminal (ou PuTTY pour Windows) :
+[source, bash]
+----
+ssh demo@<adresse_ip_publique>
+----
+
+Entrons le mot de passe.
+Installez un serveur web (Apache) :
+
+[source, bash]
+----
+sudo apt update
+sudo apt install apache2 -y
+----
+
+
+Vérifions si le serveur fonctionne :
+
+Ouvrons un navigateur web.
+
+Tapons l’adresse IP publique de la VM dans la barre d’adresse.
+
+
+
+
+
+
+

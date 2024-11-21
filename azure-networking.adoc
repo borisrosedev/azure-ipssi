@@ -1,0 +1,196 @@
+= Virtual Network (VNet) et VPN Gateway :
+:revealjs_theme: black
+
+
+== 1. Introduction à Azure Networking
+
+Azure Networking est une suite de services et de fonctionnalités réseau permettant de connecter et de gérer des ressources sur Azure de manière sécurisée et performante. 
+
+
+
+=== Cela inclut :
+
+[%step]
+* La mise en réseau virtuelle.
+* Les passerelles VPN.
+* Les pare-feu et la sécurité réseau.
+* Le routage et les solutions de connectivité hybride.
+
+
+=== ...
+
+Azure Networking est un élément fondamental pour construire des architectures fiables, sécurisées, et performantes dans le cloud.
+
+== 2. Virtual Network (VNet)
+
+=== Qu’est-ce qu’un VNet ?
+
+
+Un Virtual Network (VNet) dans Azure est un réseau privé virtuel, une version Azure d’un réseau local (LAN), qui nous permet de :
+
+[%step]
+* Connecter des ressources Azure (VM, services, bases de données) de manière isolée.
+
+=== ...
+
+[%step]
+* Contrôler les communications entre ressources via des sous-réseaux, des groupes de sécurité réseau (NSG), et des routes personnalisées.
+
+=== ...
+
+[%step]
+* Étendre notre infrastructure réseau locale à Azure en utilisant des connexions VPN ou ExpressRoute.
+
+
+== Caractéristiques principales
+
+=== Isolation et segmentation
+
+Chaque VNet est isolé des autres VNets, offrant un environnement réseau sécurisé.
+
+=== ...
+
+Les sous-réseaux permettent de segmenter les ressources au sein du VNet.
+
+=== Adresse IP personnalisée
+
+On définit une plage d'adresses IP pour le VNet (par exemple, 10.0.0.0/16), puis subdivisez en sous-réseaux (10.0.1.0/24).
+
+
+=== Connectivité
+
+Connectons VNets à :
+
+[%step]
+* Internet via des NAT Gateway ou des adresses IP publiques.
+* D'autres VNets via VNet Peering.
+* Notre réseau local via VPN Gateway ou ExpressRoute.
+
+
+=== Sécurité
+
+Protégeons nos ressources avec des Groupes de Sécurité Réseau (NSG), qui contrôlent le trafic entrant et sortant.
+
+=== ...
+
+Utilisons des appliances virtuelles de pare-feu (comme Azure Firewall).
+
+
+== Cas pratique
+
+Un VNet pourrait contenir un sous-réseau pour des serveurs web, un autre pour des bases de données, et les deux pourraient communiquer entre eux via des routes définies par l'utilisateur.
+
+
+
+== 3. VPN Gateway
+
+
+Qu’est-ce qu’une VPN Gateway ?
+
+===  ...
+
+Une VPN Gateway est un service Azure qui permet une connectivité sécurisée entre :
+
+[%step]
+* notre réseau local et Azure via un tunnel VPN.
+* Deux VNets Azure (régions ou comptes différents).
+* Nos utilisateurs et Azure via des connexions Point-to-Site.
+
+
+== Types de connexions VPN
+
+
+=== Site-to-Site (S2S)
+
+Connecte notre réseau local à Azure.
+Utilise le protocole IPSec/IKE pour établir un tunnel sécurisé.
+
+
+=== Point-to-Site (P2S)
+
+Connecte des utilisateurs individuels (par exemple, des employés distants) à Azure.
+Compatible avec OpenVPN, SSTP, et IKEv2.
+
+
+=== VNet-to-VNet
+
+Connecte deux VNets distants sur Azure, même dans différentes régions.
+
+== Performance des VPN Gateways
+
+Azure propose plusieurs SKU pour VPN Gateway, offrant différentes capacités de bande passante (100 Mbps à 10 Gbps) et options de résilience (haute disponibilité).
+
+
+== Cas pratique
+
+Une entreprise peut utiliser un VPN Site-to-Site pour connecter son réseau local à Azure et permettre aux VM hébergées dans un VNet de communiquer directement avec les serveurs locaux.
+
+
+== 4. Fonctionnalités clés d’Azure Networking avec VNet et VPN Gateway
+
+
+=== Sécurité
+
+Avec des NSG, on peut contrôler le trafic entrant et sortant pour chaque sous-réseau ou ressource.
+
+Par ailleurs, on utilise des pare-feu pour protéger contre les menaces externes.
+
+
+=== Redondance et résilience
+
+
+VPN Gateway prend en charge la redondance avec des instances actives/secondaires.
+
+=== ...
+
+Azure propose des zones de disponibilité pour assurer une haute disponibilité.
+
+
+== Intégration hybride
+
+Combinez VPN Gateway et ExpressRoute (connexion privée à faible latence) pour étendre vos réseaux locaux à Azure.
+
+
+== Automatisation
+
+On peut gérer nos VNets et VPN Gateways avec des outils comme:
+[%step]
+* Azure PowerShell, 
+* Azure CLI,
+* des templates ARM/Terraform.
+
+== 5. Cas pratiques
+
+
+
+=== Cas n°1 : Extension d’un Data Center
+
+Une entreprise étend son infrastructure locale en connectant un réseau sur site à un VNet Azure via VPN Gateway (S2S).
+
+
+=== Cas n°2 : Application multi-régions
+
+Une application nécessite des services dans deux régions Azure, connectées avec VNet Peering ou VPN Gateway (VNet-to-VNet).
+
+== Télétravail sécurisé
+
+Les employés se connectent au réseau Azure via VPN Gateway (P2S) pour accéder aux applications critiques.
+
+
+== 6. Limites et meilleures pratiques
+
+=== Limites
+
+Les VPN Gateways ont une latence plus élevée par rapport à ExpressRoute.
+
+
+Les performances des VNets et des VPN Gateways dépendent de la configuration et du SKU choisi.
+
+
+=== Meilleures pratiques
+
+Utilisez VNet Peering au lieu de VPN Gateway pour la connectivité entre VNets dans Azure, car il offre une latence moindre et de meilleures performances.
+
+Sécurisez vos VNets avec des NSG et des appliances de pare-feu.
+
+Surveillez vos connexions avec Azure Monitor pour assurer des performances optimales.

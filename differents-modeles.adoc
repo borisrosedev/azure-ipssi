@@ -1,0 +1,128 @@
+= Différenciation des principaux modèles de services Azure
+:revealjs_theme: black
+
+Azure propose trois principaux modèles de services Cloud, qui répondent à différents besoins et niveaux de contrôle : IaaS, PaaS, et SaaS.
+
+
+== 1. Infrastructure as a Service (IaaS)
+
+
+=== Définition : 
+
+L’IaaS fournit une infrastructure informatique virtuelle, comme des machines virtuelles, du stockage, ...
+
+=== ...
+
+des réseaux et des systèmes d'exploitation, que nous gérons et configurons selon nos besoins.
+
+
+=== Caractéristiques :
+
+
+=== Contrôle maximal : 
+
+Vous gérez le système d'exploitation, les applications et les données.
+
+
+=== Évolutivité : 
+
+Autrement dit ajouter ou réduire facilement les ressources matérielles.
+
+
+=== Responsabilités : 
+
+Azure s’occupe de l'infrastructure matérielle et de la virtualisation.
+
+== Exemples de services Azure :
+
+=== Azure Virtual Machines : 
+
+Créer des machines virtuelles dans le Cloud.
+
+=== Azure Disk Storage : 
+
+Fournit des disques de stockage pour nos VM.
+
+=== Azure Virtual Network (VNet) : Configurez un réseau privé pour connecter vos ressources.
+
+
+== Cas d’utilisation :
+
+
+
+Hébergement d'applications nécessitant un contrôle total du système d'exploitation.
+
+=== ...
+
+
+Environnements de test et développement pour les applications complexes.
+
+=== ...
+
+
+Déploiement de bases de données gérées en interne.
+
+
+
+== 2. Platform as a Service (PaaS)
+
+=== Définition : 
+
+Le PaaS fournit une plateforme gérée où vous pouvez déployer et gérer vos applications sans vous soucier des infrastructures sous-jacentes, comme les serveurs ou les systèmes d’exploitation.
+
+
+== Caractéristiques :
+
+=== Développement simplifié : 
+
+Les développeurs se concentrent sur l’application sans gérer l’infrastructure.
+
+=== Services intégrés : 
+
+Prend en charge des fonctionnalités comme le scaling automatique, la gestion de bases de données et l'intégration continue.
+
+=== Responsabilités partagées : 
+
+Azure gère le matériel, le système d'exploitation, le middleware, et la plateforme.
+Exemples de services Azure :
+
+=== Azure App Service : 
+
+Déployez des applications web ou mobiles sans gérer de serveurs.
+
+=== Azure Functions : 
+
+Créez des fonctions serverless exécutées en réponse à des événements.
+
+=== Azure SQL Database : 
+
+Une base de données relationnelle entièrement managée.
+
+
+
+== 3. Software as a Service (SaaS)
+
+=== Définition : 
+
+Le SaaS fournit des logiciels complets accessibles via Internet. L’utilisateur final n’a qu’à se connecter et utiliser l’application.
+
+
+=== Caractéristiques :
+
+=== Aucune gestion de l’infrastructure : 
+
+Azure s’occupe de tout, y compris l’application.
+
+=== Prêt à l’emploi : 
+
+Les utilisateurs peuvent immédiatement utiliser les fonctionnalités sans installation.
+
+=== Paiement à l’usage : 
+
+Facturation selon l'utilisation.
+
+== Exemples de services Azure :
+
+* Microsoft 365 : Suite bureautique basée sur le Cloud.
+* Dynamics 365 : Gestion d’entreprise (CRM/ERP).
+* Power BI : Plateforme d’analyse de données.

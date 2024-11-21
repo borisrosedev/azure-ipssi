@@ -1,0 +1,203 @@
+= Azure VM
+:revealjs_theme: black
+
+== 1. Introduction aux Machines Virtuelles Azure
+
+Les machines virtuelles Azure (VM) sont des instances de calcul à la demande créées dans le cloud Azure. 
+
+=== ...
+
+Elles permettent d’héberger des applications et des services, tout en offrant la flexibilité et le contrôle d’un serveur physique, sans les inconvénients de la gestion matérielle.
+
+
+== 2. Concepts de base
+
+
+=== a. Composants d'une VM Azure :
+
+=== Image de la VM : 
+
+Le système d'exploitation et les logiciels préinstallés (Windows Server, Linux, etc.).
+
+=== Taille de la VM : 
+
+Les spécifications matérielles, comme le nombre de cœurs, la RAM et le stockage.
+
+=== Disques :
+
+* Disque OS : Contient le système d'exploitation.
+* Disques de données : Stockent les fichiers et bases de données.
+* Disque temporaire : Fournit un stockage local temporaire.
+
+
+=== Réseaux :
+
+Adresses IP publiques/privées.
+Groupes de sécurité réseau (NSG) pour contrôler l’accès.
+
+=== Options de gestion :
+
+Restauration et sauvegarde.
+Surveillance via Azure Monitor.
+
+
+== b. Types de VM :
+
+=== Séries générales : 
+
+B1ls, D2s_v3, pour les charges de travail générales.
+
+=== Optimisées pour la mémoire : 
+
+E2s_v3, pour les bases de données.
+
+=== Optimisées pour le calcul : 
+
+F2s_v2, pour les charges intensives en CPU.
+
+=== VM GPU : 
+
+NC, pour le machine learning ou le rendu 3D.
+
+
+== 3. Fonctionnalités principales
+
+=== a. Flexibilité
+
+=== Choix du système d'exploitation : 
+
+Windows, Ubuntu, Red Hat, etc.
+
+=== Évolutivité horizontale et verticale : 
+
+Ajouter des instances ou augmenter les ressources.
+
+=== ...
+
+Déploiement facile via le portail Azure, Azure CLI ou des outils d’automatisation comme Terraform.
+
+
+== b. Sécurité
+
+* Chiffrement des données (au repos et en transit).
+
+* Protection avancée via Azure Defender.
+
+* Intégration avec Azure Active Directory (AAD).
+
+== c. Optimisation des coûts
+
+=== Instances réservées : 
+
+Jusqu’à 72% de réduction pour un engagement à long terme.
+
+=== VM Spot : 
+
+Utilisation à prix réduit pour des charges non critiques.
+
+=== Autoscaling : 
+
+Réduction automatique des ressources inutilisées.
+
+== 4. Processus de création d'une VM
+
+=== Étapes principales :
+
+=== Choisir une image : 
+
+Sélectionner l’OS et les logiciels préconfigurés.
+
+=== Configurer les spécifications :
+
+* Type de VM (série).
+* Taille.
+
+=== Configurer le réseau :
+
+* Créer un groupe de ressources (RG).
+* Configurer le réseau virtuel (VNet) et la sous-réseau.
+
+=== Configurer le stockage :
+
+Ajouter des disques OS et des disques de données.
+
+=== Configurer la sécurité :
+
+Ajouter des règles dans le NSG.
+
+Créer et démarrer la VM.
+
+=== Surveiller et gérer :
+
+Utiliser Azure Monitor pour les performances.
+Activer les sauvegardes via Recovery Services Vault.
+
+== 5. Exemples d'utilisation possible
+
+
+== a. Environnements de développement et de test
+
+Création rapide de VM pour tester des applications.
+Facilité de suppression après utilisation.
+
+== b. Applications critiques
+
+Héberger des applications comme ERP, CRM.
+Utilisation des séries de VM à haute performance.
+
+== c. Calcul intensif
+
+
+Rendu 3D, simulations scientifiques, machine learning.
+
+== d. Économie d’échelle
+
+Extensibilité automatique pour les applications SaaS.
+
+
+== 6. Avantages
+
+=== Flexibilité : 
+
+Hébergez n’importe quelle application, dans n’importe quel OS.
+
+=== Évolutivité : 
+
+Ajustez les ressources selon vos besoins.
+
+=== Intégration Cloud Native : 
+
+Combinez les VM avec d'autres services Azure (Base de données, Réseaux).
+
+=== Gestion simplifiée : 
+
+Surveillance et automatisation via Azure Automation.
+
+== 7. Bonnes pratiques
+
+
+=== Choisir la taille optimale : 
+
+Évitons la surallocation de ressources.
+
+Configurer les sauvegardes automatiques.
+
+=== Utiliser le tagging : 
+
+Facilite la gestion et la facturation.
+
+Optimiser les coûts avec les VM Spot et les instances réservées.
+
+=== Activer le monitoring : 
+
+Identifiez les problèmes avant qu’ils n'affectent les utilisateurs.
+
+== 8. Limitations
+
+[%step]
+* Dépendance à Internet.
+* Nécessite une surveillance constante des coûts.
+* Complexité pour des configurations avancées (réseaux hybrides).
+
+== 9. Ressources supplémentaires pour le cours
+

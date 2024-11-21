@@ -1,0 +1,170 @@
+= Héberger un site statique
+:revealjs_theme: black
+
+== Introduction
+
+Héberger un site statique sur Azure Storage est une solution rapide, sécurisée et économique pour diffuser des contenus statiques tels que:
+
+* HTML, CSS, JavaScript ou des fichiers médias. 
+
+
+== Étape 1 : Créer un compte de stockage Azure
+
+Connectez-vous au portail Azure :
+
+=== ...
+
+Allez sur Azure Portal.
+
+=== ...
+
+=== Créer un compte de stockage :
+
+Dans la barre de recherche, tapez "Comptes de stockage".
+
+=== ...
+
+Cliquez sur "Créer".
+
+=== Configurez les paramètres :
+
+* Abonnement : Choisissez votre abonnement Azure.
+
+=== ...
+
+* Groupe de ressources : Créez-en un nouveau ou utilisez un existant.
+
+=== ...
+
+
+* Nom du compte de stockage : Entrez un nom unique (ex. : mystatiquestorage).
+
+=== ...
+
+
+* Région : Sélectionnez une région proche de vos utilisateurs.
+
+=== ...
+
+* Performance : Choisissez Standard.
+
+=== ...
+
+* Redondance : Sélectionnez le niveau de redondance approprié (LRS, GRS, etc.).
+
+
+=== ...
+
+Validez et cliquez sur "Créer".
+
+
+== Étape 2 : Activer l’hébergement de site statique
+
+
+
+=== Accédez à votre compte de stockage :
+
+Une fois créé, cliquez sur le compte dans le portail Azure.
+
+=== Configurer l’hébergement statique :
+
+Sous Paramètres, cliquez sur Hébergement statique.
+
+
+Activez l’hébergement de site statique.
+
+=== Définissez les fichiers principaux :
+
+* Document d’index : Nom du fichier d'accueil (par exemple, index.html).
+* Document d’erreur (optionnel) : Nom de la page d’erreur (par exemple, 404.html).
+
+=== Enregistrez les modifications :
+
+Un point de terminaison (URL) pour le site statique sera généré, par exemple :
+[source, arduino]
+----
+https://mystatiquestorage.z22.web.core.windows.net
+----
+
+
+
+== Étape 3 : Télécharger les fichiers de votre site
+
+
+
+=== Accédez à votre conteneur \$web :
+
+Une fois l’hébergement statique activé, un conteneur spécial nommé \$web est automatiquement créé dans votre compte de stockage.
+
+=== Téléchargez les fichiers :
+
+Allez dans Explorateur de stockage et ouvrez le conteneur \$web.
+
+=== ...
+
+
+Téléchargez vos fichiers de site statique (HTML, CSS, JS, images) via l'interface ou un outil tiers comme Azure Storage Explorer.
+
+
+
+== Étape 4 : Accéder à votre site
+
+Une fois les fichiers téléchargés, accédez à votre site en utilisant l’URL du point de terminaison, par exemple :
+[source, arduino]
+----
+https://mystatiquestorage.z22.web.core.windows.net
+----
+
+
+=== Étape 5 : Configurer un domaine personnalisé (optionnel)
+
+
+=== Configurer un CNAME :
+
+Dans le portail de votre fournisseur DNS, ajoutez un enregistrement CNAME pointant vers l’URL du site statique.
+
+=== Configurer le domaine dans Azure :
+
+Dans le compte de stockage, sous Hébergement statique, ajoutez votre domaine personnalisé.
+
+
+=== Activer HTTPS (optionnel mais recommandé) :
+
+Associez un certificat SSL en activant HTTPS sécurisé via Azure CDN ou Azure Front Door.
+
+== Étape 6 : Gérer le cache et les performances (optionnel)
+
+Utilisez Azure Content Delivery Network (CDN) pour améliorer les temps de chargement des fichiers en les distribuant à travers des serveurs proches des utilisateurs.
+
+=== Étape 7 : Automatiser les déploiements (optionnel)
+
+Configurez un pipeline CI/CD avec GitHub Actions ou Azure DevOps pour déployer automatiquement les modifications sur votre site.
+
+== Avantages de l’hébergement sur Azure Storage
+
+
+=== Économique : 
+
+Coût très faible, car seule la bande passante et le stockage sont facturés.
+
+=== Sécurisé : 
+
+Bénéficie des protections Azure.
+
+=== Performant : 
+
+Intégration facile avec Azure CDN.
+
+=== Simple : 
+
+Pas de gestion de serveur ou d'infrastructure.
+
+=== ...
+
+Vous avez maintenant un site statique opérationnel sur Azure Storage, accessible à partir d'une URL publique ou d'un domaine personnalisé.
+
+
+
+
+
+

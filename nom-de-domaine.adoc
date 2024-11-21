@@ -1,0 +1,186 @@
+= DNS
+:revealjs_theme: black
+
+
+== Étape 1 : Obtenir un nom de domaine
+
+Achetez un nom de domaine auprès d'un registrar (par exemple, Namecheap, OVH, Google Domains, etc.).
+
+
+Notez les détails d'accès à la gestion DNS de votre nom de domaine.
+
+
+== Étape 2 : Associer votre domaine à votre machine virtuelle
+
+
+Trouvez l'adresse IP publique de votre machine virtuelle :
+
+
+=== ...
+
+Accédez au portail Azure > Machines Virtuelles > Sélectionnez votre VM > Vue d'ensemble.
+
+=== ...
+
+Notez l’IP publique de votre machine.
+
+
+=== ...
+
+Configurer un enregistrement DNS A :
+
+=== ...
+
+Connectez-vous à la gestion DNS de votre registrar.
+
+=== ...
+
+
+Ajoutez un enregistrement A (Address Record) pour pointer votre domaine vers l'IP publique de la VM.
+
+=== ...
+
+Nom : @ (ou laissez vide si le registrar l'indique).
+Type : A
+Valeur : Votre adresse IP publique.
+TTL : Par défaut (généralement 3600 secondes ou 1 heure).
+(Facultatif) Ajouter un sous-domaine :
+
+
+=== ...
+
+Par exemple, pour utiliser www.votredomaine.com, ajoutez un enregistrement A avec :
+Nom : www
+Type : A
+Valeur : Votre adresse IP publique.
+
+=== ...
+
+
+Vous pouvez aussi ajouter un enregistrement CNAME pour rediriger le sous-domaine vers le domaine principal :
+
+Nom : www
+Type : CNAME
+Valeur : votredomaine.com.
+
+=== ...
+
+Attendez la propagation DNS :
+
+Les changements DNS peuvent prendre jusqu’à 24 heures pour se propager, mais ils sont souvent visibles en quelques minutes.
+
+== Étape 3 : Configurer la machine virtuelle pour accepter le domaine
+
+
+Si votre application utilise un framework comme Remix, vous devez vous assurer qu’il accepte les requêtes provenant de votre domaine :
+
+
+=== ...
+
+Modifiez la configuration pour accepter les requêtes :
+
+
+
+Par exemple, pour Remix (ce que j'utilise), modifions la commande de démarrage dans package.json :
+
+[source, json]
+----
+"scripts": {
+  "start": "remix-serve --hostname 0.0.0.0 --port 3000"
+}
+----
+
+
+Relancons l’application :
+[source, bash]
+----
+npm start
+----
+Vérifiez si le domaine fonctionne :
+
+Accédez à http://votredomaine.com:3000.
+
+== Étape 4 : Configurer HTTPS avec un certificat SSL
+
+
+Pour éviter d’utiliser HTTP et rendre votre application sécurisée, configurez HTTPS.
+
+Installer Certbot pour générer un certificat SSL :
+
+Installez Certbot :
+
+[source, bash]
+----
+sudo apt update
+sudo apt install certbot -y
+----
+
+
+Générer un certificat SSL pour votre domaine :
+
+Certbot n’est pas compatible avec les ports autres que 80 et 443. Pour obtenir un certificat, vous devrez temporairement rediriger le port 80 vers votre application.
+Modifiez temporairement votre application Remix pour écouter sur le port 80 :
+[source, bash]
+----
+remix-serve --hostname 0.0.0.0 --port 80
+----
+
+Obtenez un certificat SSL pour votre domaine :
+[source, bash]
+----
+sudo certbot certonly --standalone -d votredomaine.com -d www.votredomaine.com
+----
+
+
+Configurer votre application avec le certificat SSL :
+
+Configurez Remix ou un reverse proxy comme Nginx pour utiliser le certificat. Par exemple, si vous passez par Nginx :
+
+Installez Nginx :
+[source, bash]
+----
+sudo apt install nginx -y
+----
+
+
+Configurez Nginx pour servir Remix avec HTTPS en utilisant les certificats générés par Certbot :
+
+[source, bash]
+----
+server {
+    listen 443 ssl;
+    server_name votredomaine.com www.votredomaine.com;
+
+    ssl_certificate /etc/letsencrypt/live/votredomaine.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/votredomaine.com/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+server {
+    listen 80;
+    server_name votredomaine.com www.votredomaine.com;
+    return 301 https://$host$request_uri;
+}
+
+----
+
+
+=== ...
+
+Redémarrons Nginx :
+
+[source, bash]
+----
+sudo systemctl restart nginx
+----
+
+
+Testons notre application avec HTTPS :
+
+Accédez à https://nomdomaine.com.

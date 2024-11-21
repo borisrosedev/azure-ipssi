@@ -1,0 +1,305 @@
+
+= Gestion des Ressources Azure avec Azure CLI et PowerShell
+:revealjs_theme: black
+
+
+Azure CLI et Azure PowerShell sont des outils puissants pour la gestion des ressources Azure. 
+
+
+== 1. Présentation
+
+
+== Azure CLI
+
+=== Définition
+
+Interface en ligne de commande conçue pour interagir avec Azure.
+Fonctionne sur ...
+
+=== ...
+
+Windows, MacOS, Linux, ou via le Cloud Shell.
+Commandes simples, commençant par az.
+
+== Azure PowerShell
+
+== Définition
+
+* Module basé sur PowerShell pour la gestion d’Azure.
+* Fonctionne sur Windows, MacOS, et Linux.
+* Commandes sous forme de cmdlets, commençant par Az.
+
+== Commandes courantes
+
+=== a. Groupes de Ressources
+Azure CLI
+
+Créer un groupe de ressources :
+[source, bash]
+----
+az group create --name MyResourceGroup --location eastus
+----
+
+
+=== Lister les groupes de ressources :
+[source, bash]
+----
+az group list --output table
+----
+
+
+=== Supprimer un groupe de ressources :
+
+[source, bash]
+----
+az group delete --name MyResourceGroup --yes
+----
+
+
+== Azure PowerShell
+
+=== Créer un groupe de ressources :
+
+
+[source, powershell]
+----
+New-AzResourceGroup -Name MyResourceGroup -Location "East US"
+----
+
+
+
+
+=== Lister les groupes de ressources :
+
+[source, powershell]
+----
+Get-AzResourceGroup
+----
+
+
+=== Supprimer un groupe de ressources :
+[source, powershell]
+----
+Remove-AzResourceGroup -Name MyResourceGroup
+----
+
+
+== b. Machines Virtuelles
+
+
+=== Azure CLI
+
+
+=== Créer une VM :
+[source, bash]
+----
+az vm create --resource-group MyResourceGroup --name MyVM --image UbuntuLTS --admin-username azureuser --generate-ssh-keys
+----
+
+=== Démarrer une VM :
+[source, bash]
+----
+az vm start --resource-group MyResourceGroup --name MyVM
+----
+
+
+=== Arrêter une VM :
+[source, bash]
+----
+az vm stop --resource-group MyResourceGroup --name MyVM
+----
+
+
+== Azure PowerShell
+
+
+
+=== Créer une VM :
+
+
+[source, powershell]
+----
+New-AzVM -ResourceGroupName MyResourceGroup -Name MyVM -ImageName "UbuntuLTS" -Credential (Get-Credential)
+----
+
+
+=== Démarrer une VM :
+
+[source, powershell]
+----
+Start-AzVM -ResourceGroupName MyResourceGroup -Name MyVM
+----
+
+
+=== Arrêter une VM :
+
+[source, powershell]
+----
+Stop-AzVM -ResourceGroupName MyResourceGroup -Name MyVM -Force
+----
+
+
+=== c. Comptes de Stockage
+
+
+=== Azure CLI
+
+
+=== Créer un compte de stockage :
+
+[source, bash]
+----
+az storage account create --name mystorageaccount --resource-group MyResourceGroup
+--location eastus --sku Standard_LRS
+----
+
+Lister les comptes de stockage :
+
+[source, bash]
+----
+az storage account list --output table
+----
+
+
+
+== Azure PowerShell
+
+
+Créer un compte de stockage :
+
+[source, powershell]
+----
+New-AzStorageAccount -ResourceGroupName MyResourceGroup -Name mystorageaccount -Location "East US" -SkuName Standard_LRS
+----
+
+
+
+=== Lister les comptes de stockage :
+
+
+[source, powershell]
+----
+Get-AzStorageAccount
+----
+
+
+
+=== d. Réseaux Virtuels
+
+
+
+=== Créer un réseau virtuel :
+
+
+[source, bash]
+----
+az network vnet create --resource-group MyResourceGroup --name MyVNet --address-prefix 10.0.0.0/16 --subnet-name MySubnet --subnet-prefix 10.0.0.0/24
+----
+
+
+
+
+=== Azure PowerShell
+
+
+[source, powershell]
+----
+New-AzVirtualNetwork -ResourceGroupName MyResourceGroup -Name MyVNet -Location "East US" -AddressPrefix 10.0.0.0/16 -Subnet @(New-AzVirtualNetworkSubnetConfig -Name MySubnet -AddressPrefix 10.0.0.0/24)
+----
+
+
+
+=== e. Gestion des Identifiants
+
+=== Azure CLI
+
+
+=== Connexion au compte Azure :
+[source, bash]
+----
+az login
+----
+
+
+Lister les abonnements :
+[source, bash]
+----
+az account list --output table
+----
+
+
+=== Connexion au compte Azure :
+
+
+[source, powershell]
+----
+Connect-AzAccount
+----
+
+
+
+=== Lister les abonnements :
+
+[source, powershell]
+----
+Get-AzSubscription
+----
+
+
+
+== 4. Automatisation avec des scripts
+
+=== Exemple 1 : 
+
+
+Script Azure CLI pour créer et supprimer une VM
+
+[source, bash]
+----
+#!/bin/bash
+
+#Variables
+RESOURCE_GROUP="MyResourceGroup"
+VM_NAME="MyVM"
+
+#Créer un groupe de ressources
+az group create --name $RESOURCE_GROUP --location eastus
+
+#Créer une VM
+az vm create --resource-group $RESOURCE_GROUP --name $VM_NAME --image UbuntuLTS --admin-username azureuser --generate-ssh-keys
+
+#Supprimer le groupe de ressources (et toutes les ressources associées)
+az group delete --name $RESOURCE_GROUP --yes --no-wait
+
+----
+
+
+
+=== Exemple 2 : Script PowerShell pour la gestion d’une VM
+
+
+[source, powershell]
+----
+#Variables
+$ResourceGroup = "MyResourceGroup"
+$VMName = "MyVM"
+
+#Créer un groupe de ressources
+New-AzResourceGroup -Name $ResourceGroup -Location "East US"
+
+#Créer une VM
+New-AzVM -ResourceGroupName $ResourceGroup -Name $VMName -ImageName "UbuntuLTS" -Credential (Get-Credential)
+
+#Arrêter la VM
+Stop-AzVM -ResourceGroupName $ResourceGroup -Name $VMName -Force
+
+#Supprimer le groupe de ressources
+Remove-AzResourceGroup -Name $ResourceGroup -Force
+
+----
+
+
+
+
+
+

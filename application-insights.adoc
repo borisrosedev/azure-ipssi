@@ -1,0 +1,245 @@
+= Azure Application Insights
+:revealjs_theme: black
+
+== Introduction
+
+On peut dire qu'Azure Application Insights est un service d’analyse de performance et de surveillance conçu pour surveiller les applications en temps réel. 
+
+=== ...
+
+
+Il est particulièrement utile pour détecter et résoudre les problèmes dans des applications web ou mobiles ...
+
+=== ...
+
+et pour comprendre comment elles sont utilisées par les utilisateurs.
+
+
+== 1. Fonctionnalités principales
+
+
+=== a. Surveillance en temps réel
+
+Collecte des données télémétriques des applications hébergées sur Azure, sur site ou ailleurs.
+
+=== ...
+
+Suivi des requêtes entrantes et sortantes, de la latence et des erreurs.
+
+=== b. Analyse de la performance
+
+Analyse des temps de réponse des requêtes.
+
+=== ...
+
+Identification des goulots d’étranglement.
+
+=== ...
+
+
+Suivi des exceptions et erreurs.
+
+=== c. Analyse de l'expérience utilisateur
+
+Suivi des sessions utilisateur pour comprendre comment les utilisateurs interagissent avec l'application.
+
+
+=== ...
+
+Cartographie des chemins utilisateur pour identifier les fonctionnalités les plus utilisées.
+
+
+=== ...
+
+Analyse des plantages dans les applications mobiles.
+
+
+=== d. Détection proactive des anomalies
+
+
+Détection automatique des anomalies dans les métriques (par exemple, augmentation 
+des erreurs ou des délais de réponse).
+
+=== ...
+
+Alertes configurables pour réagir rapidement aux problèmes.
+
+
+=== e. Intégration avec DevOps
+
+* Intégration avec Azure DevOps, GitHub Actions, et des pipelines CI/CD.
+
+* Analyse des performances après chaque déploiement.
+
+
+=== f. Création de journaux et requêtes
+
+Utilisation de KQL (Kusto Query Language) pour interroger et analyser les données télémétriques.
+
+=== ...
+
+Création de tableaux de bord personnalisés pour surveiller les métriques critiques.
+
+== 2. Cas d’utilisation
+
+Surveillance des performances des applications web :
+
+
+=== ...
+
+Détecter les pages lentes ou les erreurs 500 fréquentes.
+
+=== ...
+
+Identifier les requêtes SQL longues ou les dépendances défaillantes.
+
+=== Détection d'anomalies et dépannage :
+
+Identifier rapidement les exceptions fréquentes dans les logs.
+
+=== ...
+
+Réagir aux baisses de disponibilité.
+
+=== Analyse de l'expérience utilisateur :
+
+Comprendre la répartition géographique des utilisateurs.
+Suivre les taux de conversion ou les abandons.
+
+=== Support à la production :
+
+Accéder aux journaux détaillés des erreurs.
+Fournir des diagnostics rapides aux équipes de support.
+
+== 3. Fonctionnement d’Application Insights
+
+=== a. Intégration facile
+
+=== SDK intégré :
+
+Ajout de bibliothèques dans des applications .NET, Java, Node.js, Python, etc.
+
+=== Agent autonome :
+
+Permet de surveiller des applications sans modifier le code source.
+
+=== Intégration native :
+
+Disponible directement dans Azure App Services, AKS, et Functions.
+
+
+=== b. Collecte des données
+
+=== Données télémétriques collectées :
+
+[%step]
+* Demandes HTTP.
+* Exceptions.
+
+=== ...
+[%step]
+* Requêtes de base de données.
+* Dépendances externes (APIs, services tiers).
+* Trafic utilisateur (sessions, clics).
+
+=== c. Traitement des données
+
+Les données télémétriques sont envoyées vers un Log Analytics Workspace.
+Analyse et création de rapports dans le portail Azure.
+
+
+== 4. Intégrations
+
+=== Azure Monitor  (déjà vu): 
+
+Utilise Application Insights comme une extension pour centraliser les données télémétriques.
+
+
+=== DevOps Pipelines :
+
+* Récupération des journaux de performance.
+* Détection des régressions après un déploiement.
+
+
+=== Power BI :
+
+Créer des tableaux de bord interactifs à partir des données d’Application Insights.
+
+
+=== GitHub :
+
+Suivi des performances directement dans les workflows GitHub Actions. (Ceci étant dit, on continue)
+
+== 5. Alertes et automatisation
+
+
+=== a. Configuration d’alertes
+
+* Définir des seuils pour les métriques critiques (temps de réponse, taux d’erreur).
+* Recevoir des notifications via :
+- Email.
+- SMS.
+* Intégration avec Azure Alerts et Slack/Teams.
+
+=== b. Règles d’automatisation
+Déclencher des actions automatiques comme le redémarrage d’une instance défaillante ou l’exécution d’un script.
+
+
+== 6. Tarification
+
+=== a. Modèle de tarification
+
+
+=== Basé sur l’utilisation :
+
+* Paiement par volume de données collectées.
+
+=== Inclus dans Azure Monitor Logs :
+
+Intégration des données avec des coûts basés sur la taille des logs.
+
+
+=== b. Optimisation des coûts
+
+Configurer des échantillonnages pour limiter les données collectées.
+Utiliser des filtres pour collecter uniquement les données nécessaires.
+
+
+8. Cas pratiques
+
+=== Configurer Application Insights pour une application web :
+
+
+Ajouter le SDK Application Insights.
+Visualiser les performances en temps réel dans le portail Azure.
+Créer des alertes pour les erreurs 500.
+Analyse des données avec KQL :
+
+Rechercher les 5 pages les plus lentes :
+
+[source, kql]
+----
+requests
+| where success == false
+| summarize avg(duration) by name
+| top 5 by avg_duration
+----
+
+
+=== Suivre les exceptions :
+
+
+[source, kql]
+----
+exceptions
+| summarize count() by type, innermessage
+----
+
+
+
+=== Créer un tableau de bord personnalisé :
+
+* Inclure les métriques critiques (temps de réponse, taux d’erreur).
+* Ajouter des graphiques interactifs.
+
+

@@ -1,0 +1,244 @@
+= Azure Storage : Blob, Table, Queue
+:revealjs_theme: black
+
+
+== Introduction
+
+Azure Storage est une solution de stockage cloud évolutive, sécurisée, et performante, proposée par Microsoft Azure. 
+
+=== ...
+
+On verra ce qu'il en est pour Google Cloud Storage ... 😅
+
+
+Elle permet de stocker des données:
+[%step]
+* structurées, 
+* semi-structurées
+* structurées. 
+
+== 1. Petite présentation générale d’Azure Storage
+
+=== Haute disponibilité : 
+
+Données répliquées sur plusieurs zones ou régions.
+
+=== Évolutivité : 
+
+Capacité quasi illimitée.
+
+=== Sécurité : 
+
+Chiffrement au repos et en transit, intégration avec Azure Active Directory.
+
+
+=== Performances optimisées : 
+
+Adaptées aux charges de travail intensives.
+
+
+=== Types de stockage Azure :
+
+Blob Storage : Pour les objets non structurés (images, vidéos, fichiers).
+
+=== ...
+
+Table Storage : Pour les données NoSQL structurées.
+
+=== ...
+
+Queue Storage : Pour la gestion de messages entre applications.
+
+=== ...
+
+File Storage : Stockage de fichiers partagés, accessible via SMB/NFS.
+
+=== ...
+
+Disk Storage : Pour les disques persistants associés aux VM.
+
+== 2. Blob Storage
+
+Blob (Binary Large Object) Storage est conçu pour le stockage d'objets non structurés.
+
+=== Cas d’utilisation :
+
+* Stocker des images, vidéos, documents.
+* Héberger des applications web ou des fichiers statiques.
+* Backup et archivage de données.
+* Stockage de données pour l’analyse Big Data.
+
+
+=== Types de blobs :
+
+* Block Blobs : Conçu pour stocker des fichiers (jusqu'à 4,75 To).
+* Append Blobs : Optimisé pour les journaux et les logs, avec ajout séquentiel.
+* Page Blobs : Optimisé pour des accès aléatoires (disques virtuels pour les VM).
+
+
+=== Niveaux d’accès :
+* Hot Tier : Données fréquemment utilisées.
+* Cool Tier : Données rarement consultées (économies importantes).
+* Archive Tier : Données très rarement utilisées (coût réduit, mais accès lent).
+
+=== Sécurité :
+
+* Intégration avec Azure AD.
+* Chiffrement au repos (AES-256).
+* Signatures d’accès partagé (SAS) pour contrôler l’accès.
+
+=== Principales API et outils :
+
+=== Azure Storage SDK (C#, Python, Java, etc.).
+
+* Azure CLI : az storage blob.
+* Intégration avec Data Factory pour ETL.
+
+==  3. Table Storage
+
+
+Azure Table Storage est une base de données NoSQL optimisée pour les données structurées mais non relationnelles.
+
+
+=== Cas pratique:
+
+* Stockage des logs d’applications.
+* Bases de données légères pour des données semi-structurées.
+* Applications IoT ou télémétrie.
+
+=== Caractéristiques :
+
+=== Modèle clé-valeur : 
+
+Rapide et simple.
+Scalabilité horizontale.
+Faible latence pour des millions de requêtes par seconde.
+
+=== Structure des données :
+
+* PartitionKey : Regroupe des entités similaires pour optimiser les requêtes.
+* RowKey : Identifiant unique dans une partition.
+* Timestamp : Suivi automatique des modifications.
+
+=== Avantages :
+
+* Simple à configurer et à utiliser.
+* Coût réduit.
+* Compatible avec Azure Cosmos DB pour les besoins avancés.
+
+=== Limitations :
+
+* Pas de relations complexes entre les entités.
+* Pas de requêtes SQL complexes.
+
+== 4. Queue Storage
+
+Azure Queue Storage est un service de gestion de messages dans une architecture distribuée.
+
+
+=== Cas d’utilisation :
+
+* Transmission de messages entre applications.
+* File d'attente pour le traitement par des microservices.
+* Communication asynchrone dans les architectures serverless.
+
+=== Caractéristiques :
+
+=== Messages : 
+
+Taille maximale de 64 Ko (ou 200 Ko avec base64).
+
+=== Durée de vie : 
+
+Messages stockés jusqu’à 7 jours par défaut (configurable).
+
+=== Scalabilité : 
+
+Des millions de messages par queue.
+
+== Principales opérations :
+
+=== Ajouter un message : 
+
+Ajout asynchrone.
+
+=== Lire un message : 
+
+Lecture d’un message sans le supprimer.
+
+=== Supprimer un message : 
+
+Suppression après traitement.
+
+=== Sécurité :
+
+Intégration avec Azure AD et SAS pour un contrôle d’accès sécurisé.
+
+
+== 5. Cas pratique :
+
+=== Blob Storage : 
+
+link:./heberger-site-statique.htmk[Héberger un site statique]
+
+=== Table Storage : 
+
+Stocker des journaux d’applications avec des partitions par date.
+
+=== Queue Storage : 
+
+Ajouter des tâches de traitement à une file d’attente.
+
+== Outils disponibles :
+
+=== Azure Portal : 
+
+Interface utilisateur.
+
+=== Azure CLI : 
+
+Commandes pour manipuler les ressources (e.g., az storage blob upload).
+
+=== Azure Storage Explorer : 
+
+Interface graphique pour gérer les données.
+
+=== SDK Azure : 
+
+Pour intégrer les services dans vos applications (Python, .NET, etc.).
+
+== 7. Bonnes pratiques
+
+
+=== Blob Storage :
+
+* Utiliser des tiers appropriés pour réduire les coûts.
+
+* Configurer les signatures SAS pour sécuriser les partages.
+
+
+=== Table Storage :
+
+* Choisir les **PartitionKeys** pour optimiser les performances.
+
+* Archiver les partitions obsolètes dans Blob Storage.
+
+
+=== Queue Storage :
+
+* Configurer une politique de redondance pour les messages critiques.*
+* Utiliser le modèle FIFO (First-In-First-Out) si nécessaire.*
+
+== 8. Ressources supplémentaires
+
+* Documentation officielle Azure Storage
+* Azure Storage Explorer
+* Démos vidéo sur Microsoft Learn
+
+=== ...
+
+Si vous avez besoin de plans détaillés pour une démonstration pratique, comme la création et la gestion d’un Blob ou ...
+
+=== ...
+
+d’une file d’attente dans Azure, je peux vous fournir un guide étape par étape.

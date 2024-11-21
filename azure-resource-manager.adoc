@@ -1,0 +1,231 @@
+= Azure Resource Manager (ARM)
+:revealjs_theme: black
+
+== Introduction
+
+Azure Resource Manager (ARM) est la plateforme de gestion unifiée d'Azure. 
+
+=== ...
+
+Elle permet aux utilisateurs de déployer, gérer et surveiller les ressources Azure via une interface cohérente. 
+
+=== ...
+
+ARM facilite la gestion des infrastructures en tant que code (IaC) et offre des outils puissants pour organiser et sécuriser vos ressources cloud.
+
+
+== 1. Fonctionnalités principales
+
+=== Déploiement de ressources
+
+=== Modèles ARM (ARM Templates) :
+
+* Permettent de décrire les ressources Azure dans un fichier JSON.
+* Prise en charge des concepts d'infrastructure en tant que code (IaC).
+
+=== ...
+
+Les modèles peuvent inclure des dépendances, des paramètres, des sorties, et des variables.
+
+=== Groupes de ressources
+
+Organisation logique des ressources Azure (VM, bases de données, réseaux, etc.) dans des conteneurs appelés groupes de ressources.
+
+=== ...
+
+Les ressources d’un même groupe peuvent être déployées, gérées et supprimées ensemble.
+
+=== Accès basé sur les rôles (RBAC)
+
+Contrôlez qui peut gérer vos ressources Azure à l'aide de rôles prédéfinis ou personnalisés.
+
+RBAC s’applique aux abonnements, aux groupes de ressources ou à des ressources individuelles.
+
+=== Tags
+
+Ajoutez des métadonnées aux ressources pour faciliter la gestion et la facturation.
+
+=== Exemple : 
+
+des balises comme environnement:production ou projet:siteweb permettent d’identifier les ressources.
+
+== Contrôle et conformité
+
+=== Azure Policy : 
+
+Appliquer des règles à l’échelle de l’abonnement pour garantir que les ressources respectent vos exigences (par exemple, restreindre la création de ressources dans des régions spécifiques).
+
+
+
+=== Locks : 
+
+Empêchent la suppression ou la modification accidentelle de ressources critiques.
+
+=== Diagnostics et suivi
+
+
+Intégration avec Azure Monitor et Log Analytics pour suivre l'état des ressources.
+
+
+=== Automatisation
+
+Azure CLI ou PowerShell pour gérer les ressources de manière scriptée.
+
+=== ...
+
+Intégration avec des outils comme Terraform et Bicep (je ne l'utilise pas) pour une gestion avancée.
+
+
+== 2. Concepts clés
+
+=== Groupes de ressources
+
+
+Tous les éléments d'une solution Azure sont regroupés dans un groupe de ressources unique.
+
+=== ...
+
+Vous pouvez appliquer des permissions et des politiques à un groupe entier.
+
+
+=== ARM Templates
+
+
+Fichiers JSON décrivant l'état souhaité des ressources Azure.
+
+=== ...
+
+Les déploiements peuvent être idempotents, garantissant que les ressources sont configurées exactement comme prévu, quel que soit l’état initial.
+
+
+=== Déploiements :
+
+=== Incremental : 
+
+Ajoute uniquement les ressources manquantes ou modifiées.
+
+=== Complete : 
+
+Supprime toutes les ressources du groupe qui ne figurent pas dans le modèle.
+
+== 3. Fonctionnement d’ARM
+
+=== Requête : 
+
+Toutes les actions (création, suppression, mise à jour) passent par l’API REST d'ARM.
+
+=== Authentification : 
+
+ARM vérifie les autorisations via Azure Active Directory (Azure AD).
+
+=== Traitement : 
+
+
+ARM orchestre la création et la mise à jour des ressources en respectant les dépendances définies.
+
+=== Résultats : 
+
+
+ARM fournit des journaux et des retours pour chaque opération.
+
+== 4. Avantages d'ARM
+
+=== Cohérence :
+
+Utilisation d’une API unique pour toutes les ressources Azure.
+
+=== ...
+
+
+Les outils (portail Azure, CLI, PowerShell, API REST) s'appuient tous sur ARM.
+
+=== Automatisation :
+
+Déploiement reproductible grâce aux ARM Templates.
+
+=== ...
+
+
+Facilite l’intégration avec les pipelines CI/CD.
+
+=== Gestion centralisée :
+
+Unifiez la gestion des ressources, des permissions et des politiques.
+
+
+=== Contrôle des coûts et optimisation :
+
+Ajoutez des tags pour organiser et analyser les dépenses.
+
+=== ...
+
+
+Automatisez la suppression des ressources inutilisées via des scripts ARM.
+
+=== Sécurité :
+
+Intégration complète avec Azure Policy et Azure RBAC pour protéger les ressources.
+
+
+== 5. Scénarios pratiques
+
+* Déploiement d’une infrastructure
+
+* Créez une infrastructure complète (réseaux, VM, bases de données) via un modèle ARM JSON.
+
+* Définissez les dépendances entre les ressources.
+
+=== Gestion des environnements
+
+* Utilisez des tags pour distinguer les environnements (développement, test, production).
+
+
+=== ...
+
+
+* Appliquez des restrictions à certains environnements via Azure Policy.
+Audit et conformité
+
+
+=== ...
+
+* Garantissez que toutes les ressources utilisent des configurations spécifiques (ex. : chiffrement activé).
+
+
+== Migration et reprise après sinistre
+
+
+Sauvegardez l’état d’un groupe de ressources via un ARM Template.
+Restaurez l’environnement dans une autre région.
+
+== 6. Limitations
+
+=== Complexité initiale :
+
+Les modèles JSON peuvent être difficiles à écrire et à maintenir manuellement.
+La gestion avancée nécessite une courbe d'apprentissage.
+
+=== Taille des modèles :
+
+Les grands déploiements nécessitent des modèles complexes et bien structurés.
+
+=== Format JSON rigide :
+
+Comparé à des outils comme Terraform ou Bicep, le JSON peut être moins intuitif.
+
+== 7. Outils complémentaires
+
+=== Azure Bicep
+
+Langage déclaratif simplifié pour ARM (remplace le JSON pour les modèles ARM).
+Plus lisible et facile à maintenir.
+
+
+=== Terraform
+
+* Plateforme multi-cloud populaire pour gérer les infrastructures.
+* Offre une alternative flexible et plus conviviale à ARM Templates.
+
+=== Azure DevOps
+
+Intégration facile des ARM Templates dans les pipelines CI/CD.

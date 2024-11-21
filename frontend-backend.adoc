@@ -1,0 +1,212 @@
+= Étape 1 : Préparer votre machine virtuelle
+:revealjs_theme: black
+
+* Connectez-vous à la VM via SSH.
+[source, bash]
+----
+ssh -i ~/Downloads/azure_key.pem azureuser@<adresse_ip_publique>
+----
+
+Assurez-vous qu'Apache est installé et fonctionne :
+[source, bash]
+----
+sudo systemctl status apache2
+----
+
+
+Si ce n’est pas le cas, installez Apache :
+
+[source, bash]
+----
+sudo apt update
+sudo apt install apache2 -y
+----
+
+
+== Étape 2 : Déployer votre application frontend
+
+
+=== Option 1 : Application statique (HTML/CSS/JS)
+
+
+Copiez les fichiers de l'application frontend dans le répertoire /var/www/html :
+[source, bash]
+----
+sudo rm -rf /var/www/html/*
+sudo cp -r /chemin/vers/votre/frontend/* /var/www/html/
+----
+
+
+=== Vérifiez que les permissions sont correctes :
+
+[source, bash]
+----
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+----
+
+
+=== Testez l'application :
+
+
+Rendez-vous sur http://<adresse_ip_publique> dans un navigateur. Vous devriez voir votre application frontend.
+
+
+
+=== Option 2 : Frameworks JS (React, Vue, Angular)
+
+Si votre frontend est généré par un framework JavaScript :
+
+Générez les fichiers statiques : Par exemple, pour React :
+[source, bash]
+----
+npm run build
+----
+
+Copiez le contenu du dossier build (ou équivalent) dans /var/www/html.
+
+=== Étape 3 : Déployer votre application backend
+
+* Configuration avec Apache
+* Installez les prérequis pour votre backend, par exemple Node.js ou PHP.
+
+=== ...
+
+Pour Node.js :
+[source, bash]
+----
+sudo apt install nodejs npm -y
+----
+
+=== ...
+
+Pour PHP :
+
+[source, bash]
+----
+sudo apt install php libapache2-mod-php -y
+----
+
+=== ...
+
+Copiez votre backend dans un répertoire distinct, par exemple /var/www/backend :
+
+[source, bash]
+----
+sudo mkdir -p /var/www/backend
+sudo cp -r /chemin/vers/votre/backend/* /var/www/backend/
+sudo chown -R www-data:www-data /var/www/backend
+sudo chmod -R 755 /var/www/backend
+----
+
+=== ...
+
+Configurer Apache pour servir le backend :
+
+Ouvrez le fichier de configuration d’Apache :
+[source, bash]
+----
+sudo nano /etc/apache2/sites-available/000-default.conf
+----
+
+Ajoutez une directive pour votre backend, par exemple, sur le chemin /api :
+
+[source, txt]
+----
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    Alias /api /var/www/backend
+    <Directory /var/www/backend>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+----
+
+Sauvegardez et quittez.
+Redémarrez Apache :
+
+[source, bash]
+----
+sudo systemctl restart apache2
+----
+
+
+=== Testez le backend :
+
+Accédez à http://<adresse_ip_publique>/api.
+
+=== Étape 4 : Configurer le reverse proxy (si nécessaire)
+
+
+Si votre backend est une application Node.js ou une API REST qui tourne sur un port spécifique (par exemple, 3000), configurez Apache comme un reverse proxy.
+
+
+=== Activer les modules nécessaires :
+
+[source, bash]
+----
+sudo a2enmod proxy proxy_http
+sudo systemctl restart apache2
+----
+
+Modifier la configuration Apache pour rediriger les requêtes /api vers le backend Node.js :
+
+[source, txt]
+----
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    ProxyPass /api http://localhost:3000/
+    ProxyPassReverse /api http://localhost:3000/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+----
+
+Redémarrez Apache :
+
+[source, bash]
+----
+sudo systemctl restart apache2
+----
+
+=== Lancez votre backend :
+
+Par exemple, si c’est une application Node.js :
+[source, bash]
+----
+cd /var/www/backend
+npm install
+node server.js
+----
+
+
+=== Étape 5 : Vérifiez et testez
+
+Accédez au frontend sur http://<adresse_ip_publique>.
+
+Vérifiez que le frontend peut appeler l'API via http://<adresse_ip_publique>/api.
+
+=== ...
+
+
+Avec cette configuration, votre application frontend et backend cohabitent sur la même machine, et Apache gère les requêtes pour les deux. 
+
+=== ...
+
+Si vous avez des besoins spécifiques, comme un nom de domaine ou un certificat SSL, cela peut être ajouté ultérieurement.
+
+
+
+
+
+

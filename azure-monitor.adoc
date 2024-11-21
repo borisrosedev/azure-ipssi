@@ -1,0 +1,230 @@
+= Azure Monitor 
+:revealjs_theme: black
+
+
+== Introduction
+
+Azure Monitor est une solution de surveillance complète proposée par Microsoft Azure pour ...
+
+=== ...
+
+collecter, analyser et agir sur les données de performance et de diagnostic provenant de vos ressources Azure et locales. 
+
+=== ...
+
+
+Il permet aux administrateurs et aux développeurs de surveiller leurs applications, infrastructures et réseaux pour garantir des performances optimales.
+
+
+== 1. Principales fonctionnalités d’Azure Monitor
+
+
+=== Collecte de données
+
+=== Sources de données :
+
+Applications : Azure Monitor collecte des télémétries des applications via Application Insights.
+
+=== Infrastructure : 
+
+Il collecte des métriques sur les machines virtuelles, conteneurs, bases de données, etc.
+
+=== Journalisation : 
+
+Les logs d’activité Azure, les logs de ressources et les journaux personnalisés peuvent être ingérés.
+
+=== Métriques : 
+
+Données numériques collectées en temps réel pour surveiller la santé et les performances (ex. : utilisation CPU, mémoire).
+
+=== Logs : 
+
+Données structurées collectées pour des analyses approfondies (ex. : erreurs, diagnostics).
+
+== Visualisation des données
+
+=== Tableaux de bord Azure : 
+
+Créer des vues personnalisées pour surveiller les métriques clés.
+
+=== Azure Workbooks : 
+
+Des rapports interactifs et des visualisations prêtes à l'emploi.
+
+=== Intégration Power BI : 
+
+Exportez vos données Azure Monitor vers Power BI pour des analyses avancées.
+
+== Analyse des données
+
+=== Kusto Query Language (KQL) : 
+
+
+Un langage puissant pour interroger et analyser les logs.
+
+=== Intégration avec Application Insights : 
+
+Analysez en détail les performances des applications (latence, erreurs).
+
+== Alertes et actions
+
+=== Alertes intelligentes : 
+
+Détectent les anomalies dans les métriques et les logs.
+
+=== Actions automatiques : 
+
+Réagir aux alertes en déclenchant des actions comme l’exécution de runbooks, l’envoi d’e-mails ou l’intégration avec des systèmes tiers (par exemple, PagerDuty ou Slack).
+
+
+=== Automatisation et intégration
+
+=== Autoscaling : 
+
+Configurez Azure Monitor pour ajuster automatiquement les ressources en fonction de la charge.
+
+=== Azure Logic Apps : 
+
+Automatisez les workflows en fonction des alertes.
+
+=== Intégration DevOps : 
+
+Intégrez avec Azure DevOps, Jenkins ou GitHub Actions pour surveiller les pipelines CI/CD.
+
+== Sécurité et conformité
+
+=== Surveillance des menaces : 
+
+Analysez les comportements inhabituels avec des services intégrés comme Azure Sentinel.
+
+
+=== Audit et conformité : 
+
+Collectez des journaux pour répondre aux exigences réglementaires.
+
+== 2. Composants clés d’Azure Monitor
+
+=== a. Application Insights
+
+* Service de surveillance de la performance des applications (APM).
+* Détecte les problèmes dans les applications et services web.
+* Collecte des télémétries sur les utilisateurs, les temps de réponse et les erreurs.
+
+=== b. Azure Monitor Logs
+
+Utilise Log Analytics pour analyser les données des journaux.
+
+=== ...
+
+
+Centralise tous les logs pour un aperçu global.
+
+=== ...
+
+Prise en charge du langage KQL pour des analyses avancées.
+
+== c. Azure Monitor Metrics
+
+
+Fournit des données en quasi temps réel sur les performances des ressources.
+Idéal pour surveiller les tendances et détecter les anomalies.
+
+== d. Insights spécialisés
+
+
+* VM Insights : Surveillance des machines virtuelles.
+* Container Insights : Analyse des clusters Kubernetes et des conteneurs.
+* Network Insights : Surveillance des performances réseau (latence, perte de paquets).
+
+== 3. Cas d’utilisation
+
+* Surveillance des performances applicatives
+
+* Identifiez les goulets d'étranglement et optimisez les performances avec 
+
+== Application Insights.
+
+Analyse des incidents
+
+=== ...
+
+Utilisez les logs pour enquêter sur les erreurs et résoudre rapidement les problèmes.
+
+
+=== Optimisation des coûts
+
+Analysez l'utilisation des ressources pour éviter le surprovisionnement et réduire les coûts.
+
+=== Surveillance de l'infrastructure hybride
+
+
+Connectez les machines locales et les ressources Azure pour une surveillance unifiée.
+
+=== ...
+
+Automatisation des opérations
+
+=== ...
+
+
+Déclenchez automatiquement des actions correctives en réponse à des alertes.
+
+
+=== 4. Avantages d’Azure Monitor
+
+== Avantages techniques
+
+* Surveillance unifiée pour toutes les ressources Azure.
+* Détection proactive des problèmes grâce aux alertes intelligentes.
+* Extensibilité grâce à l'intégration avec d'autres services Azure et tiers.
+
+
+=== Avantages business
+
+* Réduction des temps d'arrêt grâce à une détection rapide des problèmes.
+
+=== ...
+
+* Meilleure expérience utilisateur via la surveillance applicative.
+
+=== ...
+
+* Optimisation des ressources et des coûts d'infrastructure.
+
+== 5. Tarification
+Métriques : Les 100 premières séries de métriques sont gratuites.
+
+=== Logs : Basé sur le volume de données ingérées et stockées.
+
+Application Insights : Facturation par volume de données collectées.
+
+== 6. Meilleures pratiques
+Configurez Application Insights dès le début du développement pour surveiller les applications en continu.
+
+=== ...
+Activez les alertes pour les métriques critiques (CPU, mémoire, disponibilité).
+
+=== ...
+
+Intégrez Log Analytics avec un pipeline DevOps pour des retours rapides.
+
+=== ...
+Utilisez des tableaux de bord personnalisés pour une visibilité rapide sur les ressources critiques.
+
+
+== 7. Limitations
+
+Les coûts peuvent augmenter rapidement avec un grand volume de données collectées.
+
+=== ...
+
+Les performances de KQL dépendent de la structuration et de la quantité de données.
+
+=== ...
+
+Les métriques en temps réel sont limitées à une granularité d'une minute.
+
+
+
+
+
