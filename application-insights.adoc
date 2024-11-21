@@ -205,7 +205,7 @@ Configurer des échantillonnages pour limiter les données collectées.
 Utiliser des filtres pour collecter uniquement les données nécessaires.
 
 
-8. Cas pratiques
+== 8. Cas pratiques
 
 === Configurer Application Insights pour une application web :
 

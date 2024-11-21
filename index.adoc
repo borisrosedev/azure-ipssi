@@ -4,7 +4,7 @@
 == Définition et importance : 
 
 * link:./presentation.html[Présentation du Cloud Computing et de Microsoft Azure]
-* link:./differents-modules.html[Différenciation des principaux modèles de services].
+* link:./differents-modeles.html[Différenciation des principaux modèles de services].
 * link:./concurrents.html[Présentation des concurrents d'Azure (AWS, Google Cloud).]
 
 === Cas d’usage courants : Pourquoi les entreprises choisissent Azure.
@@ -32,8 +32,8 @@
 === Azure Resource Manager (ARM) :
 
 
-link:./azure-resource-manager.html[* Groupes de ressources, 
-* modèles ARM.]
+link:./azure-resource-manager.html[Groupes de ressources, 
+modèles ARM.]
 
 == Azure CLI et PowerShell pour la gestion des ressources :
 
