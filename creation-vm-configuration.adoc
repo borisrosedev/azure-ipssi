@@ -1,5 +1,5 @@
 = Création  d'une VM
-:revealjs_theme: beige
+:revealjs_theme: black
 
 == Étape 1 : Accéder au portail Azure
 

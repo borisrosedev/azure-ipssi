@@ -1,5 +1,5 @@
 = Azure Monitor 
-:revealjs_theme: beige
+:revealjs_theme: black
 
 
 == Introduction

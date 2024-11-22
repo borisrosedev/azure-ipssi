@@ -1,5 +1,5 @@
 = Introduction à Microsoft Azure 
-:revealjs_theme: beige
+:revealjs_theme: black
 
 == Définition et importance : 
 
@@ -87,7 +87,7 @@ modèles ARM.]
 === Outils de supervision :
 
 * link:./azure-monitor.html[Azure Monitor].
-* link:./applications-insight.html[Application Insights].
+* link:./application-insights.html[Application Insights].
 
 === Mise en place de sauvegardes :
 

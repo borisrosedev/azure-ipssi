@@ -1,6 +1,6 @@
 
 = Gestion des Ressources Azure avec Azure CLI et PowerShell
-:revealjs_theme: beige
+:revealjs_theme: black
 
 
 Azure CLI et Azure PowerShell sont des outils puissants pour la gestion des ressources Azure. 

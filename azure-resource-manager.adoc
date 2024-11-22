@@ -1,5 +1,5 @@
 = Azure Resource Manager (ARM)
-:revealjs_theme: beige
+:revealjs_theme: black
 
 == Introduction
 
