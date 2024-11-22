@@ -1,5 +1,5 @@
 = Présentation du Cloud Computing et de Microsoft Azure
-:revealjs_theme: black
+:revealjs_theme: beige
 
 == 1. Qu’est-ce que le Cloud Computing ?
 

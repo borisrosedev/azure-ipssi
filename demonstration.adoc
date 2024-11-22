@@ -1,5 +1,5 @@
 = Démonstration
-:revealjs_theme: black
+:revealjs_theme: beige
 
 
 == 1. Créer une VM Linux 

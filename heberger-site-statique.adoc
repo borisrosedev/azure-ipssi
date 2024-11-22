@@ -1,5 +1,5 @@
 = Héberger un site statique
-:revealjs_theme: black
+:revealjs_theme: beige
 
 == Introduction
 

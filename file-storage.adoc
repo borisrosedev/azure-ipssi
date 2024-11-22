@@ -1,0 +1,204 @@
+= Le stockage de fichiers partagés sur Azure,
+
+
+== Introduction
+
+Le stockage de fichiers partagés sur Azure, accessible via SMB (pour Windows) ou NFS (pour Linux), ...
+
+=== ...
+
+est une solution approprié pour partager des fichiers entre plusieurs systèmes ou utilisateurs dans un environnement Cloud. 
+
+=== ...
+
+Azure propose le service Azure Files pour répondre à ces besoins.
+
+== Qu’est-ce qu’Azure Files ?
+
+Azure Files est un service de stockage dans le Cloud qui permet de créer des partages de fichiers accessibles via les protocoles standard SMB (Server Message Block) ou NFS (Network File System). 
+
+=== ...
+
+Il permet :
+
+
+* Le partage de fichiers entre plusieurs machines virtuelles ou systèmes.
+
+=== ...
+
+* Une gestion simplifiée des droits d'accès.
+
+=== ...
+
+* L'accès aux fichiers depuis n'importe quel appareil ou système compatible.
+
+
+== Caractéristiques principales :
+
+
+=== Accès SMB ou NFS :
+
+=== SMB (versions 2.1 et 3.0) : 
+
+Compatible avec Windows, Linux et macOS.
+
+=== NFS (versions 3.0 et 4.1) : 
+
+Idéal pour les systèmes Linux/Unix.
+
+
+=== Intégration avec Azure Active Directory (Entra ID) :
+
+Pour la gestion des autorisations d'accès aux fichiers via SMB.
+
+=== Redondance :
+
+Options de réplication des données pour garantir une haute disponibilité.
+
+=== Flexibilité :
+
+Accès possible depuis des VM dans Azure ou depuis des appareils locaux via Azure File Sync.
+
+== Étapes pour configurer Azure Files avec SMB ou NFS
+
+
+== 1. Créer un compte de stockage Azure
+
+
+* Connectez-vous au portail Azure :https://portal.azure.com.
+
+=== ...
+
+* Accédez à "Comptes de stockage" > Créer.
+
+=== Remplissez les informations nécessaires :
+
+* Nom : ipssicomptedestockage.
+
+* Type de performance : Standard ou Premium (c'est vous qui voyez en fonction de vos besoins).
+
+=== ...
+
+* Réplication : Locally Redundant Storage (LRS) ou une option plus redondante (GRS, ZRS).
+
+=== ...
+
+* Cliquez sur "Créer".
+
+== 2. Créer un partage de fichiers
+
+Accédez au compte de stockage créé.
+Cliquez sur "Fichiers" > "+ Partage de fichiers".
+
+=== Configurez les paramètres :
+
+Nom du partage : partage-fichiers.
+Quota : Limite de stockage en Go.
+Protocole : SMB (par défaut) ou NFS (si activé pour le compte de stockage).
+Cliquez sur "Créer".
+
+
+== 3. Connecter le partage de fichiers
+
+Via SMB (Windows, Linux, macOS)
+Accédez au partage créé et cliquez sur "Connecter".
+Suivez les instructions spécifiques à votre système :
+
+
+=== Windows :
+Utilisez la commande suivante pour mapper le partage réseau :
+
+[source, powershell]
+----
+net use Z: \\<nomducompte>.file.core.windows.net\<partage-fichiers> /u:<nomducompte> <clé_d'accès>
+
+----
+
+Exemple :
+[source, powershell]
+----
+net use Z: \\moncomptedestockage.file.core.windows.net\partage-fichiers /u:moncomptedestockage ACCESS_KEY
+----
+
+=== Linux :
+
+Montez le partage via CIFS (installé avec le package cifs-utils) :
+
+[source, bash]
+----
+#sudo mount -t cifs //moncomptedestockage.file.core.windows.net/partage-fichiers /mnt/partage -o vers=3.0, username=moncomptedestockage,password=<clé_d'accès> dir_mode=0777,file_mode=0777,serverino#
+
+----
+
+=== macOS :
+Utilisez mount_smbfs pour monter le partage :
+
+[source, bash]
+----
+
+# mount_smbfs //moncomptedestockage:<clé_d'accès>@moncomptedestockage.file.core.windows.net/partage-fichiers /Volumes/partage
+
+----
+
+
+
+=== Via NFS (Linux)
+
+Activez le protocole NFS dans les paramètres avancés du compte de stockage.
+
+Montez le partage sur votre système Linux :
+
+[source, bash]
+----
+sudo mount -t nfs <nomducompte>.file.core.windows.net:/<partage-fichiers> /mnt/partage -o vers=3
+----
+
+
+== 4. Gérer les permissions d’accès
+
+=== Pour SMB :
+
+Intégrez le partage avec Azure Active Directory (Entra ID) pour gérer les permissions des utilisateurs.
+
+=== Pour NFS :
+
+Configurez les permissions au niveau du système de fichiers sur les clients Linux.
+
+
+== 5. Utilisation avec Azure File Sync (facultatif)
+
+Si vous souhaitez synchroniser les données entre des serveurs locaux et Azure Files :
+
+Installez Azure File Sync sur votre serveur local.
+Configurez la synchronisation avec votre partage de fichiers Azure.
+
+== Cas d’utilisation
+
+=== Centralisation des fichiers :
+
+Partage unique pour plusieurs applications ou utilisateurs.
+
+=== Backup et archivage :
+
+Solution simple pour sauvegarder des fichiers.
+
+=== Développement collaboratif :
+
+Accessible simultanément depuis plusieurs environnements.
+Coûts
+
+=== Azure Files est facturé en fonction de :
+
+* L'espace utilisé (en Go).
+* Les opérations effectuées (lectures, écritures).
+* La redondance (LRS, ZRS, GRS).
+
+=== ...
+
+Avec cette configuration, vous disposerez d’un stockage de fichiers partagé robuste, facilement accessible depuis différents systèmes.
+
+
+
+
+
+

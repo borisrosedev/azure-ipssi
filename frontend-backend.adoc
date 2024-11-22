@@ -1,5 +1,5 @@
 = Étape 1 : Préparer votre machine virtuelle
-:revealjs_theme: black
+:revealjs_theme: beige
 
 * Connectez-vous à la VM via SSH.
 [source, bash]

@@ -1,5 +1,5 @@
 = Azure Application Insights
-:revealjs_theme: black
+:revealjs_theme: beige
 
 == Introduction
 
@@ -211,8 +211,16 @@ Utiliser des filtres pour collecter uniquement les données nécessaires.
 
 
 Ajouter le SDK Application Insights.
+=== ...
+
 Visualiser les performances en temps réel dans le portail Azure.
+
+=== ...
+
 Créer des alertes pour les erreurs 500.
+
+=== ...
+
 Analyse des données avec KQL :
 
 Rechercher les 5 pages les plus lentes :

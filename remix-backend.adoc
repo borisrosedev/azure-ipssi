@@ -1,5 +1,5 @@
 =  Déployer une application fullstack
-:revealjs_theme: black
+:revealjs_theme: beige
 
 == Introduction
 

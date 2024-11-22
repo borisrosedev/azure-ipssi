@@ -1,5 +1,5 @@
 = Azure VM
-:revealjs_theme: black
+:revealjs_theme: beige
 
 == 1. Introduction aux Machines Virtuelles Azure
 

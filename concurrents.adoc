@@ -1,5 +1,5 @@
 = Les concurrents d'Azure
-:revealjs_theme: black
+:revealjs_theme: beige
 
 
 == Introduction

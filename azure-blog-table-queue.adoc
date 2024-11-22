@@ -1,5 +1,5 @@
 = Azure Storage : Blob, Table, Queue
-:revealjs_theme: black
+:revealjs_theme: beige
 
 
 == Introduction
@@ -10,6 +10,8 @@ Azure Storage est une solution de stockage cloud évolutive, sécurisée, et per
 
 On verra ce qu'il en est pour Google Cloud Storage ... 😅
 
+
+=== ...
 
 Elle permet de stocker des données:
 [%step]
@@ -29,7 +31,7 @@ Capacité quasi illimitée.
 
 === Sécurité : 
 
-Chiffrement au repos et en transit, intégration avec Azure Active Directory.
+Chiffrement au repos et en transit, intégration avec Azure Active Directory (Entra ID).
 
 
 === Performances optimisées : 
@@ -41,17 +43,17 @@ Adaptées aux charges de travail intensives.
 
 Blob Storage : Pour les objets non structurés (images, vidéos, fichiers).
 
-=== ...
+=== Table Storage : 
 
-Table Storage : Pour les données NoSQL structurées.
+Pour les données NoSQL structurées.
 
-=== ...
+=== Queue Storage : 
 
-Queue Storage : Pour la gestion de messages entre applications.
+Pour la gestion de messages entre applications.
 
-=== ...
+=== File Storage : 
 
-File Storage : Stockage de fichiers partagés, accessible via SMB/NFS.
+Stockage de fichiers partagés, accessible via SMB/NFS.
 
 === ...
 
@@ -63,8 +65,12 @@ Blob (Binary Large Object) Storage est conçu pour le stockage d'objets non stru
 
 === Cas d’utilisation :
 
+[%step]
 * Stocker des images, vidéos, documents.
 * Héberger des applications web ou des fichiers statiques.
+
+=== ...
+
 * Backup et archivage de données.
 * Stockage de données pour l’analyse Big Data.
 
@@ -72,7 +78,13 @@ Blob (Binary Large Object) Storage est conçu pour le stockage d'objets non stru
 === Types de blobs :
 
 * Block Blobs : Conçu pour stocker des fichiers (jusqu'à 4,75 To).
+
+=== ...
+
 * Append Blobs : Optimisé pour les journaux et les logs, avec ajout séquentiel.
+
+=== ...
+
 * Page Blobs : Optimisé pour des accès aléatoires (disques virtuels pour les VM).
 
 
@@ -221,13 +233,18 @@ Pour intégrer les services dans vos applications (Python, .NET, etc.).
 
 * Choisir les **PartitionKeys** pour optimiser les performances.
 
+=== ...
+
 * Archiver les partitions obsolètes dans Blob Storage.
 
 
 === Queue Storage :
 
-* Configurer une politique de redondance pour les messages critiques.*
-* Utiliser le modèle FIFO (First-In-First-Out) si nécessaire.*
+* Configurer une politique de redondance pour les messages critiques.
+
+=== ...
+
+* Utiliser le modèle FIFO (First-In-First-Out) si nécessaire.
 
 == 8. Ressources supplémentaires
 

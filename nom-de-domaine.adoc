@@ -1,5 +1,5 @@
 = DNS
-:revealjs_theme: black
+:revealjs_theme: beige
 
 
 == Étape 1 : Obtenir un nom de domaine

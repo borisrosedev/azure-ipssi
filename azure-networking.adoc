@@ -1,5 +1,5 @@
 = Virtual Network (VNet) et VPN Gateway :
-:revealjs_theme: black
+:revealjs_theme: beige
 
 
 == 1. Introduction à Azure Networking

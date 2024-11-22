@@ -1,5 +1,5 @@
 = Différenciation des principaux modèles de services Azure
-:revealjs_theme: black
+:revealjs_theme: beige
 
 Azure propose trois principaux modèles de services Cloud, qui répondent à différents besoins et niveaux de contrôle : IaaS, PaaS, et SaaS.
 
